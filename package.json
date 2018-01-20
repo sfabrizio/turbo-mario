@@ -4,6 +4,7 @@
   "description": "This is a cover of Super Mario written on JS. ",
   "main": "index.js",
   "scripts": {
+    "start": "serve ./public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,6 +15,9 @@
     "game",
     "turbo-mario"
   ],
+  "engine":{
+    "node": "8"
+  },
   "author": "Samuel Fabrizio <samuelfabrizio@gmail.com>",
   "license": "MIT",
   "dependencies": {
