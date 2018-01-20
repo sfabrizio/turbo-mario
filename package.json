@@ -1,0 +1,22 @@
+{
+  "name": "turbo-mario",
+  "version": "1.0.0",
+  "description": "This is a cover of Super Mario written on JS. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "super",
+    "mario",
+    "games",
+    "js",
+    "game",
+    "turbo-mario"
+  ],
+  "author": "Samuel Fabrizio <samuelfabrizio@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^6.4.8"
+  }
+}
