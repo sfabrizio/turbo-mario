@@ -2,7 +2,7 @@
     "backgrounds": [
         {
             "tile": "sky",
-            "range": [
+            "ranges": [
                 [   
                     0, 25,
                     0, 14
@@ -11,7 +11,7 @@
         },
         {
             "tile": "ground",
-            "range": [
+            "ranges": [
                 [   
                     0, 25,
                     12, 14
