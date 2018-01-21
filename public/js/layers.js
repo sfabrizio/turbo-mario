@@ -2,16 +2,15 @@ function drawBackground (background, context, sprites ) {
     background.ranges.forEach( ([x1, x2, y1 , y2]) => {
         for (let x = x1; x < x2; ++x) {
             for (let y = y1; y < y2; ++y) {
-                console.log(background.tile, x, y);
                 sprites.drawTile(background.tile, context , x, y);
             }
         }
     })
 }
 
-export function createSpriteLayer(sprites, pos) {
+export function createSpriteLayer(marioEntity) {
     return function drarSpriteLayer(context){
-        sprites.draw('idle', context, pos.x, pos.y)
+        marioEntity.draw(context);
     }
 }
 
