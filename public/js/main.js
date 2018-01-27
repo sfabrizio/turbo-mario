@@ -1,13 +1,17 @@
 import Compositor from './Compositor.js'
 import Entity from './Entity.js'
 import Timer from './Timer.js'
+import KeyboardHandler from './KeyboardHandler.js'
 import {loadLevel} from './loader.js'
 import {loadBackgroundSprites} from './sprites.js'
 import {createBackgroundLayer, createSpriteLayer} from './layers.js'
 import {createMario} from './entities.js'
 
 const canvas = document.getElementById("screen");
-const context = canvas.getContext("2d"); 
+const context = canvas.getContext("2d");
+context.scale(2,2)
+
+
 
 Promise.all([
     createMario(),
@@ -19,20 +23,27 @@ Promise.all([
     const backgroundLayer = createBackgroundLayer(level.backgrounds, backgroundSprites);
     comp.layers.push(backgroundLayer);
 
+    const gravity = 2000;
     mario.pos.set(64, 180);
-    mario.vel.set(200, -600);
 
-    const gravity = 30;
+    const input = new KeyboardHandler(window);
+    input.addKeyBinding('Space', keyState => {
+        if (keyState) {
+            mario.jump.start();
+        } else {
+            mario.jump.cancel();
+        }
+    });    
+    
     const spritesLayer = createSpriteLayer(mario);
     comp.layers.push(spritesLayer);
     
-    const timer = new Timer();
-
+    const timer = new Timer(1/60);
     timer.update = function update(deltaTime) {
-            comp.draw(context);
-            mario.update(deltaTime);
-            mario.vel.y += gravity;
+        mario.update(deltaTime);
+        comp.draw(context);
+        mario.vel.y += gravity * deltaTime;
     }
-    
+
     timer.start();
 });
