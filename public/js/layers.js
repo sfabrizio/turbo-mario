@@ -8,9 +8,11 @@ function drawBackground (background, context, sprites ) {
     })
 }
 
-export function createSpriteLayer(marioEntity) {
+export function createSpriteLayer(entities) {   
     return function drarSpriteLayer(context){
-        marioEntity.draw(context);
+        entities.forEach( entity => {
+            entity.draw(context);
+        })
     }
 }
 
