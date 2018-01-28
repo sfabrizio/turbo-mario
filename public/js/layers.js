@@ -9,19 +9,19 @@ export function createSpriteLayer(entities) {
 export function createBackgroundLayer(level, sprites) {
     const buffer = document.createElement('canvas');
     const context = buffer.getContext('2d');
-    buffer.width = 256;
+    buffer.width = 2048;
     buffer.height = 240;
 
     level.tiles.forEach( (tile, x , y) => {
         sprites.drawTile(tile.name, context , x, y)
     });
 
-    return function drawBackgroundLayer(context) {
-        context.drawImage(buffer, 0, 0);
+    return function drawBackgroundLayer(context, camera) {
+        context.drawImage(buffer, -camera.pos.x, -camera.pos.y);
     };
 }
 
-export function createColisionLayer (level) {
+export function createColisionLayer(level) {
     const resolvedTiles = [];
 
     const tileResolver = level.tileColider.tiles;

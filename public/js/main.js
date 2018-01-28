@@ -1,5 +1,6 @@
-import Entity from './Entity.js'
+import Camera from './Camera.js'
 import Timer from './Timer.js'
+import Entity from './Entity.js'
 import {loadLevel} from './loader.js'
 import {createMario} from './entities.js'
 import {setupKeyboard} from './input.js'
@@ -15,6 +16,9 @@ Promise.all([
     loadLevel('1-1')
 ])
 .then( ([mario, level]) => {
+    const camera = new Camera();
+    window.camera = camera;
+
     mario.pos.set(64, 5);
 
     level.entities.add(mario);
@@ -35,7 +39,7 @@ Promise.all([
     const timer = new Timer(1/60);
     timer.update = function update(deltaTime) {
         level.update(deltaTime);
-        level.comp.draw(context);
+        level.comp.draw(context, camera);
     }
 
     timer.start();
