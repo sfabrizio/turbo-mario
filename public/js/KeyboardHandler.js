@@ -15,7 +15,10 @@ export default class KeyboardHandler {
     handleEvent(event) {
         const {code, type} = event
         
-        if ( !this.keyMapping.has(code) ) { return; }
+        if ( !this.keyMapping.has(code) ) { 
+            // console.log('not mapped code: ', code)
+            return; 
+        }
         event.preventDefault();
         
         const keyState = type === "keydown" ? PRESSED : RELEASED;

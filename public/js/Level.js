@@ -7,13 +7,23 @@ export default class Level {
         this.comp = new Compositor();
         this.entities = new Set();
         this.tiles = new Matrix();
-        this.colider = new TileColider(this.tiles);
+        this.tileColider = new TileColider(this.tiles);
+        this.gravity = 2000;
     }
 
     update(deltaTime) {
         this.entities.forEach( entity => {
             entity.update(deltaTime);
-            this.colider.test(entity);
+            
+            entity.pos.x += entity.vel.x * deltaTime;
+            this.tileColider.checkX(entity);
+
+            entity.pos.y += entity.vel.y * deltaTime;
+            this.tileColider.checkY(entity);
+
+            this.tileColider.test(entity);
+            
+            entity.vel.y += this.gravity * deltaTime;
         })
     }
 }

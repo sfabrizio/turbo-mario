@@ -21,6 +21,6 @@ export default class Jump extends Trait {
     }
     
     cancel(entity) {
-      this.engageTime = this.duration;
+      this.engageTime = 0;
     }
 } 

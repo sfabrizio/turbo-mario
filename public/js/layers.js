@@ -20,3 +20,40 @@ export function createBackgroundLayer(level, sprites) {
         context.drawImage(buffer, 0, 0);
     };
 }
+
+export function createColisionLayer (level) {
+    const resolvedTiles = [];
+
+    const tileResolver = level.tileColider.tiles;
+    const tileSize = tileResolver.tileSize;
+
+    const originalgetByIndex = tileResolver.getByIndex;
+
+    tileResolver.getByIndex = (x ,y) => {
+        resolvedTiles.push({x,y});
+        return originalgetByIndex.call(tileResolver, x,y);
+    }
+    
+    return function drawColisionTile(context) {
+        context.strokeStyle = 'blue';
+        resolvedTiles.forEach( ({x,y}) => {
+            context.beginPath();
+            context.rect(x * tileSize,
+                         y * tileSize , 
+                         tileSize, tileSize);
+            context.stroke();
+        })
+        resolvedTiles.length = 0;
+        
+        context.strokeStyle = 'red';
+        level.entities.forEach( (entity) => {
+            context.beginPath();
+            context.rect(entity.pos.x, 
+                         entity.pos.y, 
+                         entity.size.x, entity.size.y);
+            context.stroke();
+        })
+    };
+
+
+}
